@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Авито — анализ спроса</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="site-header">
+            <h1>Анализ спроса на Авито</h1>
+            <p class="subtitle">Парсит 10 городов, считает среднее просмотров/день и топ-3 объявления</p>
+        </header>
+
+        <main>
+            <form class="search-form" method="post" action="/search">
+                <div class="search-row">
+                    <input
+                        type="text"
+                        name="query"
+                        class="search-input"
+                        placeholder="Например: диван угловой"
+                        required
+                        autofocus
+                    >
+                    <input
+                        type="number"
+                        name="count"
+                        min="1"
+                        max="500"
+                        value="150"
+                        class="search-count"
+                        title="Сколько объявлений парсить на город (1–500)"
+                    >
+                    <button type="submit" class="btn btn-primary">Найти</button>
+                </div>
+                <div class="filters-row">
+                    <input
+                        type="number"
+                        name="price_min"
+                        min="0"
+                        placeholder="Цена от, ₽"
+                        class="search-input search-input--price"
+                    >
+                    <input
+                        type="number"
+                        name="price_max"
+                        min="0"
+                        placeholder="до, ₽"
+                        class="search-input search-input--price"
+                    >
+                </div>
+                <div class="gender-row">
+                    <span class="gender-label">Пол:</span>
+                    <label class="gender-checkbox"><input type="checkbox" name="gender" value="male"> Мужское</label>
+                    <label class="gender-checkbox"><input type="checkbox" name="gender" value="female"> Женское</label>
+                </div>
+
+                <div class="cities-section">
+                    <div class="cities-header">
+                        <span class="cities-label">Города</span>
+                        <button type="button" class="btn btn-secondary btn-cities-toggle" onclick="toggleAllCities(true)">Выбрать все</button>
+                        <button type="button" class="btn btn-secondary btn-cities-toggle" onclick="toggleAllCities(false)">Снять все</button>
+                    </div>
+                    <div class="cities-grid">
+                        {% for c in cities %}
+                        <label class="city-checkbox">
+                            <input type="checkbox" name="cities" value="{{ c.slug }}" {% if loop.index <= 10 %}checked{% endif %}>
+                            <span class="city-cb-name">{{ c.name }}</span>
+                            <span class="city-cb-pop">{% if c.population >= 1000 %}{{ (c.population / 1000) | round(1) }} млн{% else %}{{ c.population }} тыс{% endif %}</span>
+                        </label>
+                        {% endfor %}
+                    </div>
+                </div>
+            </form>
+
+            <div class="hint-box">
+                <p><strong>Важно:</strong> парсинг занимает <strong>15–40 минут</strong> — Авито открывается
+                как обычный браузер по каждому из выбранных городов. Не закрывайте страницу.</p>
+                <p>Результаты кэшируются на 24 часа — повторный запрос выдаст данные мгновенно.</p>
+                <p>Количество — любое число 1–500 (по умолчанию 150). Больше 150 — дольше, и на Авито может не хватить объявлений.</p>
+                <p>Цена — необязательно. Пусто = без ограничения. Фильтр применяется прямо на Авито.</p>
+                <p>Пол — необязательно. Отметь одно (Мужское ИЛИ Женское); если отметить оба или ничего — фильтр по полу не применяется. К запросу добавляется слово «мужские/женские».</p>
+            </div>
+        </main>
+
+    <script>
+        function toggleAllCities(state) {
+            document.querySelectorAll('input[name="cities"]').forEach(function(cb) {
+                cb.checked = state;
+            });
+        }
+    </script>
+    </div>
+</body>
+</html>

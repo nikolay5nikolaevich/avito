@@ -1,0 +1,516 @@
+/* ============================================================
+   Авито — анализ спроса. Минималистичный стиль.
+   ============================================================ */
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #1a1a2e;
+    background: #f5f7fa;
+    min-height: 100vh;
+}
+
+/* ── Контейнеры ── */
+
+.container {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 32px 20px 60px;
+}
+
+.container--wide {
+    max-width: 1200px;
+}
+
+/* ── Шапка ── */
+
+.site-header {
+    margin-bottom: 32px;
+    border-bottom: 2px solid #e1e4e8;
+    padding-bottom: 16px;
+}
+
+.site-header h1 {
+    font-size: 26px;
+    font-weight: 700;
+    color: #0d47a1;
+    letter-spacing: -0.3px;
+}
+
+.subtitle {
+    margin-top: 4px;
+    color: #555;
+    font-size: 14px;
+}
+
+/* ── Форма поиска ── */
+
+.search-form {
+    margin-bottom: 24px;
+}
+
+.search-row {
+    display: flex;
+    gap: 10px;
+}
+
+.search-input {
+    flex: 1;
+    padding: 10px 14px;
+    font-size: 16px;
+    border: 1.5px solid #c0c8d8;
+    border-radius: 6px;
+    outline: none;
+    transition: border-color 0.15s;
+    background: #fff;
+}
+
+.search-input:focus {
+    border-color: #1565c0;
+}
+
+/* ── Кнопки ── */
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.15s, opacity 0.15s;
+    white-space: nowrap;
+}
+
+.btn-primary {
+    background: #1565c0;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: #0d47a1;
+}
+
+.btn-secondary {
+    background: #e8edf5;
+    color: #1a1a2e;
+}
+
+.btn-secondary:hover {
+    background: #d0d8ea;
+}
+
+.btn-export {
+    background: #2e7d32;
+    color: #fff;
+}
+
+.btn-export:hover {
+    background: #1b5e20;
+}
+
+/* ── Поле ввода количества ── */
+
+.search-count {
+    width: 90px;
+    padding: 10px 10px;
+    font-size: 15px;
+    border: 1.5px solid #c0c8d8;
+    border-radius: 6px;
+    outline: none;
+    background: #fff;
+    transition: border-color 0.15s;
+    text-align: center;
+}
+
+.search-count:focus {
+    border-color: #1565c0;
+}
+
+/* ── Фильтры (цена) ── */
+
+.filters-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.search-input--price {
+    flex: 1;
+    max-width: 200px;
+}
+
+/* ── Фильтр пола ── */
+
+.gender-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 10px;
+}
+
+.gender-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1a1a2e;
+    white-space: nowrap;
+}
+
+.gender-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    color: #1a1a2e;
+    cursor: pointer;
+    user-select: none;
+}
+
+.gender-checkbox input[type="checkbox"] {
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+    accent-color: #1565c0;
+    flex-shrink: 0;
+}
+
+/* ── Блок выбора городов ── */
+
+.cities-section {
+    margin-top: 14px;
+}
+
+.cities-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.cities-label {
+    font-weight: 600;
+    font-size: 14px;
+    color: #1a1a2e;
+    margin-right: 4px;
+}
+
+.btn-cities-toggle {
+    padding: 5px 12px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.cities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 4px 12px;
+    max-height: 260px;
+    overflow-y: auto;
+    border: 1px solid #c0c8d8;
+    border-radius: 6px;
+    padding: 10px 12px;
+    background: #fff;
+}
+
+.city-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    padding: 3px 4px;
+    border-radius: 4px;
+    font-size: 14px;
+    user-select: none;
+}
+
+.city-checkbox:hover {
+    background: #f0f4fb;
+}
+
+.city-checkbox input[type="checkbox"] {
+    flex-shrink: 0;
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+    accent-color: #1565c0;
+}
+
+.city-cb-name {
+    flex: 1;
+    color: #1a1a2e;
+}
+
+.city-cb-pop {
+    color: #999;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+/* ── Подсказка на главной ── */
+
+.hint-box {
+    background: #e3f2fd;
+    border: 1px solid #90caf9;
+    border-radius: 6px;
+    padding: 14px 18px;
+    font-size: 14px;
+    color: #1a237e;
+}
+
+.hint-box p + p {
+    margin-top: 6px;
+}
+
+/* ── Блок прогресса ── */
+
+.progress-box {
+    text-align: center;
+    padding: 48px 24px;
+    background: #fff;
+    border-radius: 10px;
+    border: 1px solid #e1e4e8;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.progress-spinner {
+    width: 48px;
+    height: 48px;
+    border: 4px solid #e1e4e8;
+    border-top-color: #1565c0;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.progress-box h2 {
+    font-size: 20px;
+    color: #0d47a1;
+    margin-bottom: 8px;
+}
+
+.progress-city {
+    color: #555;
+    font-size: 14px;
+    margin-bottom: 16px;
+}
+
+.progress-bar-wrap {
+    background: #e1e4e8;
+    border-radius: 999px;
+    height: 10px;
+    width: 100%;
+    max-width: 440px;
+    margin: 0 auto 8px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background: #1565c0;
+    border-radius: 999px;
+    transition: width 0.4s ease;
+}
+
+.progress-counter {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 16px;
+}
+
+.progress-note {
+    font-size: 13px;
+    color: #999;
+}
+
+/* ── Блок ошибки ── */
+
+.error-box {
+    background: #fff3e0;
+    border: 1px solid #ffcc80;
+    border-radius: 8px;
+    padding: 24px 28px;
+    color: #e65100;
+}
+
+.error-box h2 {
+    margin-bottom: 8px;
+}
+
+.error-box p {
+    margin-bottom: 12px;
+    color: #6d3300;
+}
+
+.vpn-hint {
+    background: #fff8e1;
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin: 12px 0;
+    color: #5d4037;
+    font-size: 14px;
+}
+
+.vpn-hint h3 {
+    margin-bottom: 8px;
+    font-size: 15px;
+}
+
+.vpn-hint ol {
+    padding-left: 20px;
+}
+
+.vpn-hint li {
+    margin-bottom: 4px;
+}
+
+/* ── Тулбар результатов ── */
+
+.toolbar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+/* ── Таблица результатов ── */
+
+.results-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+}
+
+.results-table th {
+    background: #1565c0;
+    color: #fff;
+    text-align: left;
+    padding: 10px 14px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.results-table th.num-col {
+    text-align: right;
+}
+
+.results-table td {
+    padding: 9px 14px;
+    border-bottom: 1px solid #e8edf5;
+    vertical-align: top;
+}
+
+.results-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* Строка города */
+.city-row {
+    background: #f0f4fb;
+}
+
+.city-row--has-metro {
+    cursor: pointer;
+}
+
+.city-row--has-metro:hover {
+    background: #dce8f8;
+}
+
+.city-name {
+    font-weight: 600;
+    color: #1a237e;
+    white-space: nowrap;
+}
+
+.metro-toggle {
+    font-size: 11px;
+    margin-left: 6px;
+    color: #1565c0;
+    user-select: none;
+}
+
+/* Строки метро */
+.metro-row {
+    background: #fff;
+}
+
+.metro-city-indent {
+    border-right: 3px solid #90caf9;
+}
+
+.metro-name {
+    font-size: 13px;
+    color: #555;
+    padding-left: 18px;
+}
+
+/* Числовые колонки */
+.num-col {
+    text-align: right;
+    white-space: nowrap;
+}
+
+.avg-views {
+    font-weight: 700;
+    color: #1565c0;
+    font-size: 15px;
+}
+
+.avg-views--metro {
+    font-size: 13px;
+    color: #555;
+    font-weight: 400;
+}
+
+/* Топ-ячейки */
+.top-cell {
+    font-size: 13px;
+    min-width: 120px;
+}
+
+.top-cell a {
+    color: #1565c0;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.top-cell a:hover {
+    text-decoration: underline;
+}
+
+.top-addr {
+    display: block;
+    color: #888;
+    font-size: 12px;
+    margin-top: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+}
+
+.top-cell--empty {
+    color: #bbb;
+    text-align: center;
+}
+
+.top-cell--metro {
+    background: #fafbff;
+}
