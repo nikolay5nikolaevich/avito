@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Артефакты приложения (создаются при запуске)
+cache.db
+smoke_cache.db
+logs/
+debug/
+
+# Профиль Playwright (fallback-режим, личные куки/сессия — не коммитить)
+.pw-profile/
+
+# Node / фронтенд
+node_modules/
+*.log
+
+# Сборка фронтенда — артефакт Vite (npm run build в frontend/)
+frontend/dist/
+
+# Тулинг ИИ-агентов / скиллы (ТЗ и инструкции для нейросетей — не часть приложения)
+.agents/
+.superpowers/
+.claude/
+skills-lock.json
+
+# ОС / редакторы
+.DS_Store
+Thumbs.db
